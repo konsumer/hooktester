@@ -1,4 +1,3 @@
-hooktester
-==========
+# hooktester
 
-test hook written in PHP
+Basic github hook deploy mechanism.
