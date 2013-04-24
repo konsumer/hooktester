@@ -26,7 +26,10 @@ foreach($payload['commmits'] as $commit){
 	}
 }
 
-if ($do_pull){
-	$repo_dir = tempnam(sys_get_temp_dir(), 'github-hook'); unlink($repo_dir); mkdir($repo_dir);
-	$repo = Git::open($repo_dir, str_replace('https://', 'git@', $payload['repository']['url']) . '.git'));
+if (!$do_pull){
+	header("HTTP/1.0 403 Forbidden");
+	die("No committers are authorized.");
 }
+
+$repo_dir = tempnam(sys_get_temp_dir(), 'github-hook'); unlink($repo_dir); mkdir($repo_dir);
+$repo = Git::open($repo_dir, str_replace('https://', 'git@', $payload['repository']['url']) . '.git'));
